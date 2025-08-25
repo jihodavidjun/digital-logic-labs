@@ -27,14 +27,14 @@ module alu (
                 carry_out = add_wide[8]; 
             end
             3'b001: begin // SUB
-                result    = sub_wide[7:0];
+                result = sub_wide[7:0];
                 carry_out = sub_wide[8];
             end
             3'b010: result = a & b; // AND
             3'b011: result = a | b; // OR
             3'b100: result = a ^ b; // XOR
             default: begin
-                result    = 8'b0;
+                result = 8'b0;
                 carry_out = 1'b0;
             end
         endcase
