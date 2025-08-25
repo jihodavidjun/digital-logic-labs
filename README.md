@@ -27,10 +27,15 @@ All modules include testbenches and simulation waveforms generated with **Icarus
 
 ## Folder Structure
 alu.v # ALU design
+
 alu_tb.v # ALU testbench
+
 counter.v # Counter design
+
 counter_tb.v # Counter testbench
+
 waveforms/ # Screenshots of GTKWave simulations
+
 README.md
 
 
