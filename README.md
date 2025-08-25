@@ -14,6 +14,7 @@ Each design includes a corresponding testbench and simulation waveforms generate
 - Files: `alu.v`, `alu_tb.v`  
 - Verified with a testbench and waveform outputs.
 
+
 - **I/O:** `a[7:0]`, `b[7:0]`, `op[2:0]` → `result[7:0]`, `carry_out`, `zero`
 - **Ops:** 000=ADD, 001=SUB, 010=AND, 011=OR, 100=XOR
 - **Run:** `iverilog -o alu_test alu.v alu_tb.v && vvp alu_test && gtkwave alu.vcd`
