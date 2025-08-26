@@ -12,56 +12,73 @@ Each design includes a corresponding testbench and simulation waveforms generate
 - 8-bit ALU supporting operations such as ADD, SUB, AND, OR, XOR.  
 - Demonstrates combinational logic and use of `case` statements.  
 - Files: `alu.v`, `alu_tb.v`  
-- Verified with a testbench and waveform outputs.
-- **I/O:** `a[7:0]`, `b[7:0]`, `op[2:0]` -> `result[7:0]`, `carry_out`, `zero`
-- **Ops:** 000=ADD, 001=SUB, 010=AND, 011=OR, 100=XOR
-- **Run:** `iverilog -o alu_test alu.v alu_tb.v && vvp alu_test && gtkwave alu.vcd`, or run online on [EDA Playground](https://edaplayground.com) (paste `alu.v` as Design and `alu_tb.v` as Testbench, select Icarus Verilog + EPWave).
-- **Waveform:** see `waveforms/alu.png`
+- Verified with a testbench and waveform outputs.  
+- **I/O:** `a[7:0]`, `b[7:0]`, `op[2:0]` -> `result[7:0]`, `carry_out`, `zero`  
+- **Ops:** 000=ADD, 001=SUB, 010=AND, 011=OR, 100=XOR  
+- **Run:** `iverilog -o alu_test alu.v alu_tb.v && vvp alu_test && gtkwave alu.vcd`, or run online on [EDA Playground](https://edaplayground.com) (paste `alu.v` as Design and `alu_tb.v` as Testbench, select Icarus Verilog + EPWave).  
+- **Waveform:** see `waveforms/alu.png`  
 
 ### 2. Counter – Sequential
-- 4-bit synchronous counter with reset.  
+- 4-bit synchronous up-counter with synchronous active-high reset.  
 - Demonstrates sequential logic and clocked behavior (`posedge clk`).  
 - Files: `counter.v`, `counter_tb.v`  
+- **I/O:** `clk`, `rst` -> `q[3:0]`  
+- **Behavior:**  
+  - On each rising edge of `clk`:  
+    - If `rst=1`, counter resets to 0.  
+    - Else, counter increments by 1 (wraps from 15 → 0).  
+- **Run:** `iverilog -o counter_test counter.v counter_tb.v && vvp counter_test && gtkwave counter.vcd`, or run online on [EDA Playground](https://edaplayground.com) (paste `counter.v` as Design and `counter_tb.v` as Testbench, select Icarus Verilog + EPWave).  
+- **Waveform:** see `waveforms/counter.png`  
 
-### 3. Traffic Light Controller – FSM
-- Models a traffic light system with states: Green → Yellow → Red.  
-- Demonstrates FSM design and conditional transitions.  
-- Files: `fsm_traffic.v`, `fsm_traffic_tb.v`  
+### 3. Heartbeat Counter – FSM
+- Digital circuit inspired by my ECG biopatch research.  
+- Counts simulated heartbeat pulses (`pulse_in`) over a time window to compute beats per minute (BPM).  
+- Demonstrates applied FSM design and event-driven counting.  
+- Files: `heartbeat_counter.v`, `heartbeat_counter_tb.v`  
+- **I/O:** `clk`, `rst`, `pulse_in` -> `bpm[7:0]`  
+- **Behavior:**  
+  - On each detected pulse, increment beat counter.  
+  - After one “measurement window” (scaled in testbench), update BPM output and reset counter.  
+- **Run:** `iverilog -o heartbeat_test heartbeat_counter.v heartbeat_counter_tb.v && vvp heartbeat_test && gtkwave heartbeat_counter.vcd`, or run online on [EDA Playground](https://edaplayground.com).  
+- **Waveform:** see `waveforms/heartbeat_counter.png`  
 
-### 4. Vending Machine Controller – FSM (Planned)
-- Accepts coin inputs (nickel, dime, quarter).  
-- Accumulates value until target price, then asserts a “dispense” output.  
-- Demonstrates more complex FSM design with multiple inputs/outputs.  
-- Files: `vending_machine.v`, `vending_machine_tb.v`  
-
+### 4. Mini RISC-V – Datapath + Control
+- Simplified RISC-V CPU core (subset of instructions).  
+- Integrates ALU, register file, and FSM-based control logic.  
+- Demonstrates combination of datapath design and instruction sequencing.  
+- Files: `mini_riscv.v`, `mini_riscv_tb.v`  
+- **I/O:** `clk`, `rst`, `instr[31:0]` -> `reg_out` (observed in testbench)  
+- **Behavior:**  
+  - Supports a small instruction set (e.g., ADD, SUB, AND, OR).  
+  - FSM control unit fetches, decodes, and executes instructions step by step.  
+- **Run:** `iverilog -o risc_test mini_riscv.v mini_riscv_tb.v && vvp risc_test && gtkwave mini_riscv.vcd`, or run online on [EDA Playground](https://edaplayground.com).  
+- **Waveform:** see `waveforms/mini_riscv.png`  
 ---
 
 ## Folder Structure
 README.md
 
-alu.v + alu_tb.v # combinational foundation
+alu.v + alu_tb.v # combinational foundation (ALU)
 
-counter.v + counter_tb.v # sequential foundation
+counter.v + counter_tb.v # sequential foundation (Counter)
 
-fsm_traffic.v + tb.v # first applied FSM
+heartbeat_counter.v + heartbeat_counter_tb.v # applied FSM (bio-inspired project)
 
-vending_machine.v + tb.v # second applied FSM (planned)
+mini_riscv.v + mini_riscv_tb.v # applied datapath + control FSM (computer architecture)
 
-waveforms/ # screenshots of EDA Playground simulations
+waveforms/ # screenshots of simulation waveforms
 
 ---
 
 ## Tools Used
 - **Icarus Verilog (iverilog, vvp)** – compile and run Verilog code  
-- **GTKWave** – view simulation waveforms
-- **EDA Playground** – online simulator for sharing code  
+- **GTKWave** – view simulation waveforms locally  
+- **EDA Playground** – online simulator for running and sharing code without installs    
 
 ---
 
 ## Motivation
 I began learning Verilog through self-study and HDLBits practice, and expanded into building my own complete projects.  
-This repository demonstrates my ability to:
-- Design combinational and sequential circuits in Verilog  
-- Apply finite state machines (FSMs) to model real-world systems  
-- Verify designs with testbenches and waveform analysis  
-- Document projects in a professional format for others to use  
+I first implemented foundational designs (ALU, Counter), then extended to **personalized applied projects** inspired by my experiences in signal processing and computer architecture:  
+- a Heartbeat Counter (bio-inspired FSM, tied to my ECG biopatch research), and  
+- a Mini RISC-V core (datapath + FSM control).  
