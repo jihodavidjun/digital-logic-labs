@@ -2,7 +2,7 @@
 
 This repository contains a collection of Verilog projects that I designed and simulated as part of learning digital logic and hardware description languages.  
 The projects start from foundational combinational and sequential circuits and extend to applied finite state machines (FSMs).  
-Each design includes a corresponding testbench and simulation waveforms generated with **Icarus Verilog** and **GTKWave**.
+Each design includes a corresponding testbench and simulation waveforms generated with **Icarus Verilog** and **GTKWave** (or **EDA Playground**).
 
 ---
 
@@ -15,7 +15,7 @@ Each design includes a corresponding testbench and simulation waveforms generate
 - Verified with a testbench and waveform outputs.
 - **I/O:** `a[7:0]`, `b[7:0]`, `op[2:0]` -> `result[7:0]`, `carry_out`, `zero`
 - **Ops:** 000=ADD, 001=SUB, 010=AND, 011=OR, 100=XOR
-- **Run:** `iverilog -o alu_test alu.v alu_tb.v && vvp alu_test && gtkwave alu.vcd`
+- **Run:** `iverilog -o alu_test alu.v alu_tb.v && vvp alu_test && gtkwave alu.vcd`, or run online on [EDA Playground](https://edaplayground.com) (paste `alu.v` as Design and `alu_tb.v` as Testbench, select Icarus Verilog + EPWave).
 - **Waveform:** see `waveforms/alu.png`
 
 ### 2. Counter – Sequential
@@ -47,7 +47,7 @@ fsm_traffic.v + tb.v # first applied FSM
 
 vending_machine.v + tb.v # second applied FSM (planned)
 
-waveforms/ # screenshots of GTKWave simulations
+waveforms/ # screenshots of EDA Playground simulations
 
 ---
 
