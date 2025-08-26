@@ -79,6 +79,6 @@ waveforms/ # screenshots of simulation waveforms
 
 ## Motivation
 I began learning Verilog through self-study and HDLBits practice, and expanded into building my own complete projects.  
-I first implemented foundational designs (ALU, Counter), then extended to **personalized applied projects** inspired by my experiences in signal processing and computer architecture:  
+I first implemented foundational designs (ALU, Counter), then extended to **personalized applied projects** inspired by my experiences in **signal processing** and **computer architecture**:  
 - a Heartbeat Counter (bio-inspired FSM, tied to my ECG biopatch research), and  
 - a Mini RISC-V core (datapath + FSM control).  
