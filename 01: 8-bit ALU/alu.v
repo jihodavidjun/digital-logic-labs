@@ -1,4 +1,3 @@
-// alu.v — 8-bit combinational ALU
 // Ops: 000=ADD, 001=SUB, 010=AND, 011=OR, 100=XOR
 // Flags: carry_out (add/sub), zero (result==0)
 
