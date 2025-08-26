@@ -53,7 +53,8 @@ waveforms/ # screenshots of GTKWave simulations
 
 ## Tools Used
 - **Icarus Verilog (iverilog, vvp)** – compile and run Verilog code  
-- **GTKWave** – view simulation waveforms  
+- **GTKWave** – view simulation waveforms
+- **EDA Playground** – online simulator for sharing code  
 
 ---
 
