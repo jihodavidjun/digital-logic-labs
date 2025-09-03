@@ -46,12 +46,12 @@ Each design includes a corresponding testbench and simulation waveforms generate
 - Simplified RISC-V CPU core (subset of instructions).  
 - Integrates ALU, register file, and FSM-based control logic.  
 - Demonstrates combination of datapath design and instruction sequencing.  
-- Files: `mini_riscv.v`, `mini_riscv_tb.v`  
+- Files: `mini_riscv.v`, `mini_riscv_tb.sv`  
 - **I/O:** `clk`, `rst`, `instr[31:0]` -> `reg_out` (observed in testbench)  
 - **Behavior:**  
   - Supports a small instruction set (e.g., ADD, SUB, AND, OR).  
   - FSM control unit fetches, decodes, and executes instructions step by step.  
-- **Run:** `iverilog -o risc_test mini_riscv.v mini_riscv_tb.v && vvp risc_test && gtkwave mini_riscv.vcd`, or run online on [EDA Playground](https://edaplayground.com).  
+- **Run:** `iverilog -o risc_test mini_riscv.v mini_riscv_tb.sv && vvp risc_test && gtkwave mini_riscv.vcd`, or run online on [EDA Playground](https://edaplayground.com).  
 - **Waveform:** see `waveforms/mini_riscv.png`  
 ---
 
