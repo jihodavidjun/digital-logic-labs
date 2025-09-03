@@ -45,16 +45,15 @@ module mini_riscv_tb;
   // I-type encoder: instr[31:20]=imm[11:0], [19:15]=rs1, [14:12]=funct3, [11:7]=rd, [6:0]=opcode
   // 'imm' is sign-extended by the DUT.
   function [31:0] I;
-    input [11:0] imm; // 12-bit immediate (signed)
-    input [4:0] rs1;
-    input [2:0] funct3;
-    input [4:0] rd;
-    input [6:0] opcode;
+    input [11:0] imm;
+    input [4:0]  rs1;
+    input [2:0]  funct3;
+    input [4:0]  rd;
+    input [6:0]  opcode;
     begin
-      I = {{20{imm[11]}}, imm, rs1, funct3, rd, opcode};
+      I = {imm, rs1, funct3, rd, opcode}; // exact packing
     end
   endfunction
-
   // B-type encoder: instr[31]=imm[12], instr[30:25]=imm[10:5], instr[11:8]=imm[4:1], instr[7]=imm[11], instr[0]=0 
   //'imm' here is a byte offset (signed, multiple of 2). Assume caller provides an even offset; the LSB becomes 0 inside the packed instruction.
   function [31:0] B;
@@ -117,7 +116,7 @@ module mini_riscv_tb;
     dut.imem[5] = `OR_(5'd6, 5'd1, 5'd2);
 
     // pc = 0x18: if (x0==x0) branch +8 bytes -> skip next instruction (at 0x1C) and land at 0x20
-    // BEQ offset is a byte offset. WXkip exactly one 4-byte instruction, but because of the simple 3-state FSM timing, +8 ensures a clean jump.
+    // BEQ offset is a byte offset. Skip exactly one 4-byte instruction, but because of the simple 3-state FSM timing, +8 ensures a clean jump.
     dut.imem[6] = `BEQ(5'd0, 5'd0, 13'd8);
 
     // pc = 0x1C: x7 = 99 (should be skipped due to BEQ)
@@ -132,13 +131,21 @@ module mini_riscv_tb;
     $display("x3=%0d (expect 12), x4=%0d (expect 2), x5=%0d (expect 5), x6=%0d (expect 7), x7=%0d (expect 11)",
              dut.regs[3], dut.regs[4], dut.regs[5], dut.regs[6], dut.regs[7]);
 
+<<<<<<< HEAD:04: Mini RISC-V/mini_riscv_tb.v
     // Pass/fail prints
+=======
+    // Immediate assertions
+>>>>>>> 85af160 (Update TB.):04: Mini RISC-V/mini_riscv_tb.sv
     assert (dut.regs[3] === 32'd12) else $fatal("x3 wrong: %0d", dut.regs[3]);
     assert (dut.regs[4] === 32'd2 ) else $fatal("x4 wrong: %0d", dut.regs[4]);
     assert (dut.regs[5] === 32'd5 ) else $fatal("x5 wrong: %0d", dut.regs[5]);
     assert (dut.regs[6] === 32'd7 ) else $fatal("x6 wrong: %0d", dut.regs[6]);
     assert (dut.regs[7] === 32'd11) else $fatal("x7 wrong: %0d", dut.regs[7]);
+<<<<<<< HEAD:04: Mini RISC-V/mini_riscv_tb.v
     
+=======
+
+>>>>>>> 85af160 (Update TB.):04: Mini RISC-V/mini_riscv_tb.sv
     #200 $finish;
   end
 
