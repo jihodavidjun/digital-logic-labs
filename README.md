@@ -64,7 +64,7 @@ counter.v + counter_tb.v # sequential foundation (Counter)
 
 heartbeat_counter.v + heartbeat_counter_tb.v # applied FSM (bio-inspired project)
 
-mini_riscv.v + mini_riscv_tb.v # applied datapath + control FSM (computer architecture)
+mini_riscv.v + mini_riscv_tb.sv # applied datapath + control FSM (computer architecture)
 
 waveforms/ # screenshots of simulation waveforms
 
