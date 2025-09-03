@@ -133,12 +133,12 @@ module mini_riscv_tb;
              dut.regs[3], dut.regs[4], dut.regs[5], dut.regs[6], dut.regs[7]);
 
     // Pass/fail prints
-    if (dut.regs[3] !== 32'd12) $display("FAIL: x3 wrong!");
-    if (dut.regs[4] !== 32'd2) $display("FAIL: x4 wrong!");
-    if (dut.regs[5] !== 32'd5) $display("FAIL: x5 wrong!");
-    if (dut.regs[6] !== 32'd7) $display("FAIL: x6 wrong!");
-    if (dut.regs[7] !== 32'd11) $display("FAIL: x7 wrong!");
-
+    assert (dut.regs[3] === 32'd12) else $fatal("x3 wrong: %0d", dut.regs[3]);
+    assert (dut.regs[4] === 32'd2 ) else $fatal("x4 wrong: %0d", dut.regs[4]);
+    assert (dut.regs[5] === 32'd5 ) else $fatal("x5 wrong: %0d", dut.regs[5]);
+    assert (dut.regs[6] === 32'd7 ) else $fatal("x6 wrong: %0d", dut.regs[6]);
+    assert (dut.regs[7] === 32'd11) else $fatal("x7 wrong: %0d", dut.regs[7]);
+    
     #200 $finish;
   end
 
